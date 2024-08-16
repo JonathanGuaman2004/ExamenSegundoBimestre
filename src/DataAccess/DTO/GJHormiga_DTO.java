@@ -9,7 +9,6 @@ public class GJHormiga_DTO {
     private Integer gjProvincia;
     private Integer gjGenoAlimento;
     private Integer gjIngestaNativa;
-
     private String gjNombreGenoAlimento;
     private String gjNombreIngestaNativa;
     private String gjNombreSexo;
@@ -17,13 +16,31 @@ public class GJHormiga_DTO {
     private String gjEstadoCondición;
     private String gjEstado;
 
-    
-
+    /**
+     * ConstructorUno
+     * @param gjTipoHormiga: gjTipoHormiga
+     */
     public GJHormiga_DTO(String gjTipoHormiga) {
         this.gjTipoHormiga = gjTipoHormiga;
     }
+
+    /**
+     * Constructor Vacio
+     */
     public GJHormiga_DTO() {
     }
+
+    /**
+     * ConstructoDos
+     * @param gjRowNum: gjRowNum
+     * @param gjIDHormiga: gjIDHormiga
+     * @param gjTipoHormiga: gjTipoHormiga
+     * @param gjNombreGenoAlimento: gjNombreGenoAlimento
+     * @param gjNombreIngestaNativa: gjNombreIngestaNativa
+     * @param gjNombreSexo: gjNombreSexo
+     * @param gjNombreProvincia: gjNombreProvincia
+     * @param gjEstadoCondición: gjEstadoCondición
+     */
     public GJHormiga_DTO(Integer gjRowNum, Integer gjIDHormiga, String gjTipoHormiga, String gjNombreGenoAlimento,
             String gjNombreIngestaNativa, String gjNombreSexo, String gjNombreProvincia, String gjEstadoCondición) {
         this.gjRowNum = gjRowNum;
@@ -35,6 +52,7 @@ public class GJHormiga_DTO {
         this.gjNombreProvincia = gjNombreProvincia;
         this.gjEstadoCondición = gjEstadoCondición;
     }
+
     public Integer getGjIDHormiga() {
         return gjIDHormiga;
     }

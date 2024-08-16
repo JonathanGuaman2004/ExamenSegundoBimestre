@@ -1,6 +1,5 @@
 package UserInterface.Form;
 
-import java.net.URL;
 import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -8,11 +7,18 @@ import javax.swing.JPanel;
 
 import UserInterface.GJIAStyle;
 
-public class MainPanel extends JPanel{
-    public MainPanel(){
+public class GJMainPanel extends JPanel{
+    
+    /**
+     * Contructor vacio
+     */
+    public GJMainPanel(){
         customizeComponent();
     }
 
+    /**
+     * curtomizador de los componentes
+     */
     private void customizeComponent() {
         try {
             ImageIcon imageIcon = new ImageIcon(GJIAStyle.URL_MAIN);

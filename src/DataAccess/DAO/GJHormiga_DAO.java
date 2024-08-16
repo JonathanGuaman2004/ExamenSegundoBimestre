@@ -53,9 +53,9 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
                      +" JOIN GJLocalidad l ON h.Provincia = l.IdLocalidad"
                      +" WHERE h.Estado ='A' ";
         try {
-            Connection conn = gjOpenConnection();         // conectar a DB     
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...    
-            ResultSet  rs   = stmt.executeQuery(query);    // ejecutar la
+            Connection conn = gjOpenConnection();
+            Statement  stmt = conn.createStatement();
+            ResultSet  rs   = stmt.executeQuery(query);
             while (rs.next()) {
             GJHormiga_DTO s = new GJHormiga_DTO(rs.getInt(1)
                 ,rs.getInt(2)
@@ -119,20 +119,20 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
         +" ) sub                    "
         +" WHERE RowNum = " + id.toString();
         try {
-            Connection conn = gjOpenConnection();         // conectar a DB
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...
-            ResultSet  rs   = stmt.executeQuery(query);    // ejecutar la
+            Connection conn = gjOpenConnection();
+            Statement  stmt = conn.createStatement();
+            ResultSet  rs   = stmt.executeQuery(query);
             System.out.println(query);
             while (rs.next()) {
                 s = new GJHormiga_DTO(
-                     rs.getInt(1)     // RowNum
-                    ,rs.getInt(2)     // IdCatalogo
-                    ,rs.getString(3)     // IdCatalogoTipo
-                    ,rs.getString(4)  // Nombre
-                    ,rs.getString(5)  // Descripcion
-                    ,rs.getString(6)  // Descripcion
-                    ,rs.getString(7)  // Descripcion
-                    ,rs.getString(8));  // Estado
+                     rs.getInt(1)
+                    ,rs.getInt(2)
+                    ,rs.getString(3)
+                    ,rs.getString(4)
+                    ,rs.getString(5)
+                    ,rs.getString(6)
+                    ,rs.getString(7)
+                    ,rs.getString(8));
             }
         }
         catch (SQLException e) {
@@ -147,23 +147,17 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
                      +" FROM    GJHormiga               "
                      +" WHERE   Estado ='A'           ";
         try {
-            Connection conn = gjOpenConnection();         // conectar a DB     
-            Statement  stmt = conn.createStatement();   // CRUD : select * ...    
-            ResultSet rs   = stmt.executeQuery(query);  // ejecutar la
+            Connection conn = gjOpenConnection();
+            Statement  stmt = conn.createStatement();
+            ResultSet rs   = stmt.executeQuery(query);
             while (rs.next()) {
-                return rs.getInt(1);                    // TotalReg
+                return rs.getInt(1);
             }
         } 
         catch (SQLException e) {
             throw new GJPatException(e.getMessage(), getClass().getName(), "getRowCount()");
         }
         return 0;
-    }
-
-    private int gjSeleccionarProvincia() {
-        int min = 6;
-        int max = 29;
-        return (int)(Math.random() * (max - min + 1)) + min;
     }
 
     @Override
@@ -214,6 +208,11 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
         }
     }
 
+    /**
+     * metodo que verifica el tipo de dato seleccionado
+     * @param gjIngestaNativa: el numero ingesta nativa
+     * @return retona en lo que se deben convertir
+     */
     private String verificarTipo(Integer gjIngestaNativa) {
         if(gjIngestaNativa==4){
             return "Hormiga de la tierra";
@@ -227,6 +226,21 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
         return "no";
     }
 
+    /**
+     * Metodo que asigna las provincias
+     * @return retorna un numero aleatorio que representará a las provincias
+     */
+    private int gjSeleccionarProvincia() {
+        int min = 6;
+        int max = 29;
+        return (int)(Math.random() * (max - min + 1)) + min;
+    }
+
+    /**
+     * metodo que verifica el tipo de dato seleccionado
+     * @param gjGenoAlimento: el numero genbo alimento
+     * @return retona en lo que se deben convertir
+     */
     private int verificarSexo(Integer gjGenoAlimento) {
         if(gjGenoAlimento==8){
             return 3;

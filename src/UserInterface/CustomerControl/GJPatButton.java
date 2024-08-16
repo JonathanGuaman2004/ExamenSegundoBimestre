@@ -1,37 +1,42 @@
 package UserInterface.CustomerControl;
 
-import java.awt.Font;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
-
 import UserInterface.GJIAStyle;
-
 import javax.swing.ImageIcon;
 
-public class PatButton  extends JButton implements MouseListener {
-    public PatButton(String text){
-        customizeComponent(text);
+public class GJPatButton  extends JButton implements MouseListener {
+    public GJPatButton(String text){
+        gjCustomizeComponent(text);
     }
-    public PatButton(String text, String iconPath){
-        customizeComponent(text, iconPath);
+    public GJPatButton(String text, String iconPath){
+        gjCustomizeComponent(text, iconPath);
     }
 
-    public void customizeComponent(String text, String iconPath){ 
+    /**
+     * Metodo para customizar
+     * @param text: el texto
+     * @param iconPath: iconPath
+     */
+    public void gjCustomizeComponent(String text, String iconPath){
         
         setSize(20, 70);
         addMouseListener(this);
-        customizeComponent(text);
-        setBounds(50, 30, 90, 20); 
+        gjCustomizeComponent(text);
+        setBounds(50, 30, 90, 20);
         
         setIcon(new ImageIcon(iconPath));
         setFont(GJIAStyle.FONT);
     }
-    public void customizeComponent(String text) {
+
+    /**
+     * Metodo para customizar
+     * @param text: el texto
+     */
+    public void gjCustomizeComponent(String text) {
         setText(text);
         setOpaque(false);
         setFocusPainted(false);

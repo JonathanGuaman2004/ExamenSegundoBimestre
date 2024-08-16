@@ -7,24 +7,32 @@ import java.sql.SQLException;
 public abstract class GJSQLiteDataHelper {
     private static String gjDBPathConnection = "jdbc:sqlite:DataBase//GJEcuaFauna.sqlite"; 
     private static Connection gjConn = null;
-    // protected SQLiteDataHelper(){}
     
+    /**
+     * metodo para abrir una conexion con la base de datos
+     * @return retorna la conexion
+     * @throws Exception: En caso de haber errores, se lanzará esta excepcion que indicará el error o el problema de su ejecucion
+     */
     protected static synchronized Connection gjOpenConnection() throws Exception{
         try {
             if(gjConn == null)
                 gjConn = DriverManager.getConnection(gjDBPathConnection);
         } catch (SQLException e) {
-             throw e;   //new Exception(e,"SQLiteDataHelper","Fallo la coneccion a la base de datos");
+             throw e;
         } 
         return gjConn;
     }
 
+    /**
+     * metodo para cerrar la conexion
+     * @throws Exception: En caso de haber errores, se lanzará esta excepcion que indicará el error o el problema de su ejecucion
+     */
     protected static void GJcloseConnection() throws Exception{
         try {
             if (gjConn != null)
                 gjConn.close();
         } catch (Exception e) {
-            throw e;    //new Exception(e,"SQLiteDataHelper", "Fallo la conección con la base de datos");
+            throw e;
         }
     }
 }

@@ -6,18 +6,21 @@ import UserInterface.GJIAStyle;
 
 import java.awt.*;
 
-public class PatLabelText extends JPanel{
-    private PatLabel    lblEtiqueta = new PatLabel();
-    private PatTextBox  txtContenido= new PatTextBox();
+public class GJPatLabelText extends JPanel{
+    private GJPatLabel    lblEtiqueta = new GJPatLabel();
+    private GJPatTextBox  txtContenido= new GJPatTextBox();
 
-    public PatLabelText(String etiqueta) {
+    /**
+     * Contructor Uno
+     * @param etiqueta: etiqueta
+     */
+    public GJPatLabelText(String etiqueta) {
         setLayout(new BorderLayout());
 
         lblEtiqueta.setCustomizeComponent(  etiqueta, 
                                             GJIAStyle.FONT_SMALL, 
                                             GJIAStyle.COLOR_FONT_LIGHT, 
                                             GJIAStyle.ALIGNMENT_LEFT); 
-        //txtContenido.setBorder(txtContenido.createBorderLine());
         txtContenido.setBorderLine();
         add(lblEtiqueta, BorderLayout.NORTH);
         add(txtContenido, BorderLayout.CENTER);

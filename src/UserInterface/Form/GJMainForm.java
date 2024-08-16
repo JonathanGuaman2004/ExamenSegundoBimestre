@@ -2,26 +2,29 @@ package UserInterface.Form;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import UserInterface.GJIAStyle;
 
-public class MainForm extends JFrame{
-    MenuPanel  pnlMenu = new MenuPanel();
-    JPanel     pnlMain = new MainPanel();
- 
-    public MainForm(String tilteApp) {
+public class GJMainForm extends JFrame{
+    GJMenuPanel  pnlMenu = new GJMenuPanel();
+    JPanel     pnlMain = new GJMainPanel();
+
+    /**
+     * metodo para las acciones de los botones
+     * @param tilteApp
+     */
+    public GJMainForm(String tilteApp) {
         customizeComponent(tilteApp);
-        pnlMenu.btnHome.addActionListener(      e -> setPanel(new MainPanel())); 
-        pnlMenu.btnLogin.addActionListener(     e -> setPanel(new LoginPanel())); 
-        pnlMenu.btnSexo.addActionListener(      e -> setPanel(new SexoPanel()));  
-        pnlMenu.btnLocalidad.addActionListener( e -> setPanel(new MainPanel())); 
-        //agregar
-        pnlMenu.btnTest.addActionListener( e -> { GJIAStyle.showMsgError("mensaje de error");}); 
+        pnlMenu.btnHome.addActionListener(      e -> setPanel(new GJMainPanel())); 
+        pnlMenu.btnLogin.addActionListener(     e -> setPanel(new GJLoginPanel())); 
+        pnlMenu.btnSexo.addActionListener(      e -> setPanel(new GJHormigaPanel()));  
     }
 
+    /**
+     * ajustes del panel 
+     * @param formularioPanel: formularioPanel
+     */
     private void setPanel(JPanel formularioPanel) {
         Container container = getContentPane();
         container.remove(pnlMain);
@@ -31,20 +34,20 @@ public class MainForm extends JFrame{
         repaint();
     }
      
-    //JOptionPane.showMessageDialog(this, "Seleccionaste Opción 3");
-
+    /**
+     * metodo para customizar los componentes
+     * @param tilteApp: tilteApp
+     */
     private void customizeComponent(String tilteApp) {
         setTitle(tilteApp);
         setSize(950, 800);
         setResizable(false);
-        setLocationRelativeTo(null); // Centrar en la pantalla
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Crear un contenedor para los dos paneles usando BorderLayout
         Container container = getContentPane();
         container.setLayout(new BorderLayout());
 
-        // Agregar los paneles al contenedor
         container.add(pnlMenu, BorderLayout.WEST);
         container.add(pnlMain, BorderLayout.CENTER);
         setVisible(true);

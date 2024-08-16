@@ -29,9 +29,9 @@ public abstract class GJIAStyle {
     public static final Cursor CURSOR_HAND    = new Cursor(Cursor.HAND_CURSOR);
     public static final Cursor CURSOR_DEFAULT = new Cursor(Cursor.DEFAULT_CURSOR);
 
-    public static final URL URL_MAIN  = GJIAStyle.class.getResource("/UserInterface/Resource/Image/main.png");
-    public static final URL URL_LOGO  = GJIAStyle.class.getResource("/UserInterface/Resource/Image/logo.png");
-    public static final URL URL__SPLASH = GJIAStyle.class.getResource("/UserInterface/Resource/Image/splash.png");
+    public static final URL URL_MAIN  = GJIAStyle.class.getResource("/UserInterface/Resource/Image/Main.png");
+    public static final URL URL_LOGO  = GJIAStyle.class.getResource("/UserInterface/Resource/Image/Logo.png");
+    public static final URL URL__SPLASH = GJIAStyle.class.getResource("/UserInterface/Resource/Image/Splash.png");
 
     public static final CompoundBorder createBorderRect(){
         return BorderFactory.createCompoundBorder(  new LineBorder(Color.lightGray),

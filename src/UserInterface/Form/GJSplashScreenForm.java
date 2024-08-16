@@ -13,6 +13,9 @@ public class GJSplashScreenForm {
     private static ImageIcon    icoImagen;
     private static JLabel       lblSplash;
 
+    /**
+     * metodo para mostrar la progress bar
+     */
     public static void show() {
         icoImagen = new ImageIcon(GJIAStyle.URL__SPLASH);
         lblSplash = new JLabel(icoImagen);

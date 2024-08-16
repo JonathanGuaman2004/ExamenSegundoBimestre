@@ -11,25 +11,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import UserInterface.GJIAStyle;
-import UserInterface.CustomerControl.PatButton;
+import UserInterface.CustomerControl.GJPatButton;
 
-public class MenuPanel extends JPanel {
-    public  PatButton   
-            btnHome     = new PatButton("Home"),
-            btnLogin    = new PatButton("Login"),
-            btnSexo     = new PatButton("Sexo"),
-            btnLocalidad= new PatButton("Localidad"),
-            btnTest     = new PatButton("btnTest");
+public class GJMenuPanel extends JPanel {
+    public  GJPatButton
+            btnHome     = new GJPatButton("Home"),
+            btnLogin    = new GJPatButton("Login"),
+            btnSexo     = new GJPatButton("Sexo");
 
-    public MenuPanel(){
+    /**
+     * contructor vacio
+     */
+    public GJMenuPanel(){
         customizeComponent();
     }
 
+    /**
+     * metodo para customizar los componentes
+     */
     private void customizeComponent() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(350, getHeight())); 
 
-        // add-logo
         try {
             Image logo = ImageIO.read(GJIAStyle.URL_LOGO);
             logo = logo.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -38,14 +41,10 @@ public class MenuPanel extends JPanel {
             e.printStackTrace();
         }
 
-        // add-botones
         add(btnHome);
         add(btnLogin);
         add(btnSexo);
-        add(btnLocalidad);
-        add(btnTest);
 
-        // add-copyright
-        add(new JLabel("\u00A9 2024 pat_mic"));
+        add(new JLabel("\u00A9 2024 Jonathan_Guaman"));
     }
 }

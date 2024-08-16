@@ -1,17 +1,20 @@
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
-
 import UserInterface.Form.GJSplashScreenForm;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import UserInterface.Form.MainForm;
+import UserInterface.Form.GJMainForm;
 
+/**
+ * @author: Jonathan Steven Guaman Maza
+ */
 public class App {
+    /**
+     * Método de Entrada Principal
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-        // Create a new instance of the Scanner class
-        //SplashScreenForm x = new SplashScreenForm();
-        //x.show();
         FlatLightLaf.setup();
         FlatLightLaf.supportsNativeWindowDecorations();
         try {
@@ -20,6 +23,6 @@ public class App {
             e.printStackTrace();
         }
         GJSplashScreenForm.show();
-        MainForm frmMain = new MainForm("GJEcuaFauna");
+        GJMainForm frmMain = new GJMainForm("GJEcuaFauna");
     }
 }

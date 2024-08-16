@@ -5,18 +5,17 @@ import javax.swing.*;
 import BusinessLogic.GJHormigaBL;
 import DataAccess.DTO.GJHormiga_DTO;
 import UserInterface.GJIAStyle;
-import UserInterface.CustomerControl.PatButton;
-import UserInterface.CustomerControl.PatLabel;
-import UserInterface.CustomerControl.PatTextBox;
-import javax.imageio.ImageIO;
-import java.io.IOException;
+import UserInterface.CustomerControl.GJPatButton;
+import UserInterface.CustomerControl.GJPatLabel;
+import UserInterface.CustomerControl.GJPatTextBox;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class SexoPanel  extends JPanel implements ActionListener {
+public class GJHormigaPanel  extends JPanel implements ActionListener {
     private Integer rowNum = 0, idRowMaxSexo=0;
     private GJHormigaBL  gjHormigaBL  = new GJHormigaBL();
     private GJHormiga_DTO gjHormigaDAO = null;
@@ -25,47 +24,48 @@ public class SexoPanel  extends JPanel implements ActionListener {
     JComboBox<String> gjComboBoxGenoAlimento = new JComboBox<>(gjItemsGenoAlimento);
     JComboBox<String> gjComboBoxIngestaNativa = new JComboBox<>(gjItemsIngestaNativa);
 
-/************************
-* FormDesing : pat_mic
-************************/ 
-    private PatLabel 
-        lblTitulo   = new PatLabel("SEXO"),
-        lblrowNum   = new PatLabel(" Codigo:      "),
-        lblNombre   = new PatLabel("*Descripción: "),
-        lblTotalReg = new PatLabel(" 0 de 0 "),
-        lblGenoAlimento  = new PatLabel("Geno - Alimento"),
-        lblIngestaNativa = new PatLabel("Ingesta Nativa");
-    private PatTextBox 
-        txtrowNum   = new PatTextBox(),
-        txtNombre   = new PatTextBox();
-    private PatButton 
-        btnPageIni  = new PatButton(" |< "),
-        btnPageAnt  = new PatButton(" << "),
-        btnPageSig  = new PatButton(" >> "),
-        btnPageFin  = new PatButton(" >| "),
 
-        btnRowIni   = new PatButton(" |< "),
-        btnRowAnt   = new PatButton(" << "),
-        btnRowSig   = new PatButton(" >> "),
-        btnRowFin   = new PatButton(" >| "),
+    private GJPatLabel
+        lblTitulo   = new GJPatLabel("SIMULADOR"),
+        lblNombre   = new GJPatLabel("Nombres: "),
+        lblrowNum   = new GJPatLabel("Cedula:      "),
+        lblTotalReg = new GJPatLabel(" 0 de 0 "),
+        lblGenoAlimento  = new GJPatLabel("Geno - Alimento"),
+        lblIngestaNativa = new GJPatLabel("Ingesta Nativa");
+    private GJPatTextBox
+        txtrowNum   = new GJPatTextBox(),
+        txtNombre   = new GJPatTextBox();
+    private GJPatButton
+        btnPageIni  = new GJPatButton(" |< "),
+        btnPageAnt  = new GJPatButton(" << "),
+        btnPageSig  = new GJPatButton(" >> "),
+        btnPageFin  = new GJPatButton(" >| "),
 
-        btnCrear    = new PatButton("Crear Hormiga Larva"),
-        btnAlimeGeno= new PatButton("Crear Hormiga Larva"),
-        btnAlimeInge= new PatButton("Crear Hormiga Larva"),
+        btnRowIni   = new GJPatButton(" |< "),
+        btnRowAnt   = new GJPatButton(" << "),
+        btnRowSig   = new GJPatButton(" >> "),
+        btnRowFin   = new GJPatButton(" >| "),
 
-        btnGuardar  = new PatButton("Guardar"),
-        //btnCancelar = new PatButton("Cancelar"),
-        btnEliminar = new PatButton("Eliminar");
-    private JPanel 
+        btnCrear    = new GJPatButton("Crear Hormiga Larva"),
+        btnAlimeGeno= new GJPatButton("Crear Hormiga Larva"),
+        btnAlimeInge= new GJPatButton("Crear Hormiga Larva"),
+
+        btnGuardar  = new GJPatButton("Guardar"),
+        btnEliminar = new GJPatButton("Eliminar");
+
+    private JPanel
         pnlTabla    = new JPanel(),
         pnlBtnRow   = new JPanel(new FlowLayout()),
         pnlBtnCrear = new JPanel(new FlowLayout()),
         pnlBtnGenoA = new JPanel(new FlowLayout()),
         pnlBtnInges = new JPanel(new FlowLayout()),
-        //pnlBtnPage  = new JPanel(new FlowLayout()),
         pnlBtnCRUD  = new JPanel(new FlowLayout());
 
-    public SexoPanel() {
+
+    /**
+     * Constructor Vacio
+     */
+    public GJHormigaPanel() {
         try {
             customizeComponent();
             loadRow();
@@ -93,6 +93,9 @@ public class SexoPanel  extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * metodo paea upgradear la ingesta nativa
+     */
     private void btnUpdateAlimeInge() {
         try {
             if (GJIAStyle.showConfirmYesNo("¿Seguro que desea ACTUALIZAR ?")){
@@ -109,6 +112,11 @@ public class SexoPanel  extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Metodo para obtener los integer que representan los datos de las combobox
+     * @param gjComboBoxDos: gjComboBox
+     * @return retorna un valor entero
+     */
     private Integer gjObtenerDatoComboBox2(JComboBox<String> gjComboBoxDos) {
         if(gjComboBoxDos.getSelectedItem().equals("Carnivoro")){
             return 4;
@@ -122,6 +130,9 @@ public class SexoPanel  extends JPanel implements ActionListener {
         return -1;
     }
 
+    /**
+     * metodo paea upgradear el geno alimento
+     */
     private void btnUpdateAlimeGeno() {
         try {
             if (GJIAStyle.showConfirmYesNo("¿Seguro que desea ACTUALIZAR ?")){
@@ -138,6 +149,11 @@ public class SexoPanel  extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Metodo para obtener los integer que representan los datos de las combobox
+     * @param gjComboBoxUno: gjComboBox
+     * @return retorna un valor entero
+     */
     private Integer gjObtenerDatoComboBox1(JComboBox<String> gjComboBoxUno) {
         if(gjComboBoxUno.getSelectedItem().equals("X")){
             return 8;
@@ -149,6 +165,9 @@ public class SexoPanel  extends JPanel implements ActionListener {
         return -1;
     }
 
+    /**
+     * metodo para cargar la tabla
+     */
     private void loadRow()  {
         try {
             rowNum      = 1;
@@ -158,26 +177,34 @@ public class SexoPanel  extends JPanel implements ActionListener {
             GJIAStyle.showMsg(e.getMessage());
         }
     }
-///iMPORTANTE
+
+    /**
+     * metodo para mostrar la tabla
+     */
     private void showRow() {
         boolean gjHormigaNull = (gjHormigaDAO == null);
-        txtrowNum.setText((gjHormigaNull) ? " " : gjHormigaDAO.getGjIDHormiga().toString());
-        txtNombre.setText((gjHormigaNull) ? " " : gjHormigaDAO.getGjTipoHormiga());
+        txtrowNum.setText("1726395781");
+        txtNombre.setText("Jonathan Steven Guaman Maza");
         lblTotalReg.setText(rowNum.toString() + " de " + idRowMaxSexo.toString());
     }
 
+    /**
+     * metodo para las acciones con un nuevo click
+     * @throws Exception: En caso de haber errores, se lanzará esta excepcion que indicará el error o el problema de su ejecucion
+     */
     private void btnNuevoClick() throws Exception{
         gjHormigaBL.gjAdd();
-        //revisar sigulinea
         gjHormigaDAO = null;
         loadRow();
         showRow();
         showTable();
     }
     
+    /**
+     * metodo para guardar datos seleccionados
+     */
     private void btnGuardarClick() {
         boolean gjHormigaNull = (gjHormigaDAO == null);
-        // String buttonText = ((JButton) e.getSource()).getText();
         try {
             if (GJIAStyle.showConfirmYesNo("¿Seguro que desea " + ((gjHormigaNull) ? "AGREGAR ?" : "ACTUALIZAR ?"))){
                 GJIAStyle.showMsg("Guardado Correctamente");
@@ -190,6 +217,9 @@ public class SexoPanel  extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * metodo para eliminar objetos
+     */
     private void btnEliminarClick() {
         try {
             if (GJIAStyle.showConfirmYesNo("Seguro que desea Eliminar?")) {
@@ -204,16 +234,6 @@ public class SexoPanel  extends JPanel implements ActionListener {
         } catch (Exception e) {
             GJIAStyle.showMsgError(e.getMessage());
         }
-    }
-
-    
-
-    private void btnCancelarClick() {
-        try {
-            if(gjHormigaDAO == null)
-                loadRow();
-            showRow();
-        } catch (Exception e) {}
     }
 
     @Override
@@ -232,6 +252,10 @@ public class SexoPanel  extends JPanel implements ActionListener {
         } catch (Exception ex) {}
     }
 
+    /**
+     * metodo para mostrar las tabla
+     * @throws Exception: En caso de haber errores, se lanzará esta excepcion que indicará el error o el problema de su ejecucion
+     */
     private void showTable() throws Exception {
         String[] header = {"RN","ID","Tipo", "Geno Alimento", "Ingesta Nativa","Sexo","Localidad","Estado"};
         Object[][] data = new Object[gjHormigaBL.getAll().size()][8];
@@ -279,23 +303,17 @@ public class SexoPanel  extends JPanel implements ActionListener {
         });
     }
 
-
-
+    /**
+     * metodo customizador de posiciones de los componentes
+     */
     public void customizeComponent() {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         
-        //txtrowNum.setEnabled(false);
+        txtrowNum.setEnabled(false);
+        txtNombre.setEnabled(false);
         txtrowNum.setBorderLine();
         txtNombre.setBorderLine();
-
-        //pnlBtnPage.add(btnPageIni);
-        //pnlBtnPage.add(btnPageAnt);
-        //pnlBtnPage.add(new PatLabel(" Page:( "));
-        //pnlBtnPage.add(lblTotalReg); //cambiar
-        //pnlBtnPage.add(new PatLabel(" ) "));
-        //pnlBtnPage.add(btnPageSig);
-        //pnlBtnPage.add(btnPageFin);
 
         pnlBtnRow.add(btnRowIni);
         pnlBtnRow.add(btnRowAnt);
@@ -310,8 +328,7 @@ public class SexoPanel  extends JPanel implements ActionListener {
 
         pnlBtnCRUD.add(btnEliminar);
         pnlBtnCRUD.add(btnGuardar);
-        //pnlBtnCRUD.add(btnNuevo);
-        //pnlBtnCRUD.add(btnCancelar);
+
         pnlBtnCRUD.setBorder(GJIAStyle.createBorderRect());
 
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -320,15 +337,6 @@ public class SexoPanel  extends JPanel implements ActionListener {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
         add(lblTitulo, gbc);
-//-------------------------------------------------------------------------
-
-        //gbc.gridy = 6;
-        //gbc.gridx = 0;
-        //gbc.gridwidth = 1;
-        //add(new JLabel("■ Sección de datos: "), gbc);
-        //gbc.gridy = 6;
-        //gbc.gridx = 1;
-        //add(pnlBtnPage, gbc);
 
         gbc.gridy = 4;
         gbc.gridx = 0;
@@ -337,19 +345,19 @@ public class SexoPanel  extends JPanel implements ActionListener {
         gbc.ipadx = 450;
         pnlTabla.add(new Label("Loading data..."));
         add(pnlTabla, gbc);
-//-------------------------------------------------------------------------
+
         gbc.ipady = 1;
         gbc.ipadx = 1;
 
         gbc.gridy = 5;
         gbc.gridx = 0;
         gbc.gridwidth = 3;
-        gbc.insets = new Insets(50, 0, 0, 0);  // Ajusta el valor superior a 50
+        gbc.insets = new Insets(50, 0, 0, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(Box.createRigidArea(new Dimension(0, 0)), gbc);
 
         gbc.insets = new Insets(10, 0, 0, 0);
-//-------------------------------------------------------------------------
+
 
         gbc.gridy = 5;
         gbc.gridx = 0;
@@ -358,7 +366,7 @@ public class SexoPanel  extends JPanel implements ActionListener {
         gbc.gridy = 5;
         gbc.gridx = 1;
         add(pnlBtnRow, gbc);
-        //---------------------------------------
+
         
         gbc.gridy = 3;
         gbc.gridx = 0;
@@ -367,52 +375,46 @@ public class SexoPanel  extends JPanel implements ActionListener {
         gbc.gridy = 3;
         gbc.gridx = 1;
         add(pnlBtnCrear, gbc);
-//******************************************************************* */
+
+
         gbc.gridy = 2;
         gbc.gridx = 0;
         add(lblrowNum, gbc);
         gbc.gridy = 2;
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = GridBagConstraints.REMAINDER; // Indica que este componente ocupa toda la fila
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
         add(txtrowNum, gbc);
-//------------------------------------------------------------------
+
+
         gbc.gridy = 1;
         gbc.gridx = 0;
         add(lblNombre, gbc);
         gbc.gridy = 1;
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = GridBagConstraints.REMAINDER; // Indica que este componente ocupa toda la fila
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
         add(txtNombre, gbc);
 
         
         gbc.gridy = 6;
         gbc.gridx = 0;
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.gridwidth = GridBagConstraints.REMAINDER;
         add(lblGenoAlimento, gbc);
         gbc.gridy = 7;
         gbc.gridx = 0;
-        //gbc.gridwidth = GridBagConstraints.REMAINDER; // Indica que este componente ocupa toda la fila
         add(gjComboBoxGenoAlimento, gbc);
         gbc.gridy = 8;
         gbc.gridx = 0;
-        //gbc.gridwidth = GridBagConstraints.REMAINDER; // Indica que este componente ocupa toda la fila
         add(pnlBtnGenoA, gbc);
 
         gbc.gridy = 9;
         gbc.gridx = 0;
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.gridwidth = GridBagConstraints.REMAINDER;
         add(lblIngestaNativa, gbc);
         gbc.gridy =10;
         gbc.gridx = 0;
-        //gbc.gridwidth = GridBagConstraints.REMAINDER; // Indica que este componente ocupa toda la fila
         add(gjComboBoxIngestaNativa, gbc);
         gbc.gridy = 11;
         gbc.gridx = 0;
-        //gbc.gridwidth = GridBagConstraints.REMAINDER; // Indica que este componente ocupa toda la fila
         add(pnlBtnInges, gbc);
 
         gbc.gridy = 12;
@@ -422,5 +424,4 @@ public class SexoPanel  extends JPanel implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(pnlBtnCRUD, gbc);
     }
-
 }

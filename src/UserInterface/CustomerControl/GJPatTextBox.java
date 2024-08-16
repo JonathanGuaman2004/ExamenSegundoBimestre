@@ -8,28 +8,39 @@ import javax.swing.border.EmptyBorder;
 
 import UserInterface.GJIAStyle;
 
-public class PatTextBox extends JTextField {
+public class GJPatTextBox extends JTextField {
 
-    public PatTextBox() {
+    /**
+     * Constructor Vacio
+     */
+    public GJPatTextBox() {
         customizeComponent();
     }
 
+    /**
+     * metodo customizador de componenetes
+     */
     private void customizeComponent() {
         setBorderRect();
-        setFont(GJIAStyle.FONT);  
-        setForeground(GJIAStyle.COLOR_FONT_LIGHT);  
-        setCaretColor(GJIAStyle.COLOR_CURSOR);    // Color del cursor
-        setMargin(new Insets(5, 5, 5, 5));      // Ajusta los márgenes
-        setOpaque(false);                       // Fondo transparente
-        //setUI(new BasicTextFieldUI());  // Para deshabilitar el subrayado por defecto
+        setFont(GJIAStyle.FONT);
+        setForeground(GJIAStyle.COLOR_FONT_LIGHT);
+        setCaretColor(GJIAStyle.COLOR_CURSOR);
+        setMargin(new Insets(5, 5, 5, 5));
+        setOpaque(false);
     }
 
+    /**
+     * metodo que cusomiza el borde
+     */
     public void setBorderRect() {
         Border lineBorder = BorderFactory.createLineBorder(GJIAStyle.COLOR_BORDER);
         Border emptyBorder = new EmptyBorder(5, 5, 5, 5);  // Márgenes internos
         setBorder( new CompoundBorder(lineBorder, emptyBorder));
     }
 
+    /**
+     * metodo que cusomiza la linea
+     */
     public void setBorderLine(){
         int thickness = 1;
         setBorder(  BorderFactory.createCompoundBorder(
