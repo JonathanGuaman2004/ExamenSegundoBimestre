@@ -1,11 +1,15 @@
 package DataAccess.DAO;
 
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+
+import BusinessLogic.Entities.Hormiga.GJLarva;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,12 +25,13 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
 
     @Override
     public boolean gjCreate() throws Exception {
+        GJLarva nuevo = new GJLarva();
         String query = " INSERT INTO GJHormiga (TipoHormiga ,Sexo ,Provincia,GenoAlimento,IngestaNativa) VALUES (?,?,?,?,?)";
         try {
             Connection        conn  = gjOpenConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, "Larva");
-            pstmt.setInt(2, 4);
+            pstmt.setString(1, nuevo.getTipo());
+            pstmt.setInt(2, 3);
             pstmt.setInt(3, gjSeleccionarProvincia());
             pstmt.setInt(4, 3);
             pstmt.setInt(5, 3);
@@ -48,7 +53,7 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
                      +" ,a2.Nombre        "
                      +" ,s.Nombre "
                      +" ,l.Nombre "
-                     +" ,h.EstadoCondición "
+                     +" ,h.EstadoCondicion "
                      +" FROM GJHormiga h    "
                      +" JOIN GJAlimento a1 ON h.GenoAlimento  = a1.IDAlimento"
                      +" JOIN GJAlimento a2 ON h.IngestaNativa = a2.IDAlimento"
@@ -112,7 +117,7 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
         +"         ,a2.Nombre AS NombreAlimento2"
         +"         ,l.Nombre AS provincia"
         +"         ,s.Nombre AS Sexo"
-        +"         ,h.EstadoCondición AS estadoCondicion"
+        +"         ,h.EstadoCondicion AS estadoCondicion"
         +"     FROM GJHormiga h        "
         +"     JOIN GJAlimento a1 ON h.GenoAlimento = a1.IDAlimento "
         +"     JOIN GJAlimento a2 ON h.IngestaNativa = a2.IDAlimento"
@@ -169,6 +174,7 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
         LocalDateTime now = LocalDateTime.now();
         String query = "UPDATE GJHormiga "
                      + " SET GenoAlimento = ?,"
+                     + " TipoHormiga      = ?,"
                      + " Sexo             = ?,"
                      + " FechaModifica    = ?"
                      + " WHERE IDHormiga  = ?";
@@ -176,58 +182,61 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
             Connection          conn = gjOpenConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
             pstmt.setInt(1, entity.getGjGenoAlimento());
-            pstmt.setInt(2, verificarSexo(entity.getGjGenoAlimento()));
-            pstmt.setString(3, dtf.format(now).toString());
-            pstmt.setInt(4, entity.getGjIDHormiga());
+            pstmt.setString(2, gjVerificarTipoHormiga(entity.getGjGenoAlimento()));
+            pstmt.setInt(3, gjVerificarSexo(entity.getGjGenoAlimento()));
+            pstmt.setString(4, dtf.format(now).toString());
+            pstmt.setInt(5, entity.getGjIDHormiga());
             pstmt.executeUpdate();
             return true;
-        } 
+        }
         catch (SQLException e) {
             throw new GJPatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
     
+    private String gjVerificarTipoHormiga(Integer gjGenoAlimento) {
+        if(gjGenoAlimento==11){
+            return "Soldado";
+        }else {
+            return "Larva";
+        }
+    }
+
     @Override
     public boolean gjUpdateIngestaNativa(GJHormiga_DTO entity) throws Exception {
+        System.out.println(entity.getGjNombreGenoAlimento());
+        System.out.println(entity.getGjIngestaNativa());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
         String query = "UPDATE GJHormiga "
                      + " SET IngestaNativa = ?,"
-                     + " TipoHormiga       = ?,"
-                     + " FechaModifica     = ?"
+                     + " FechaModifica     = ?,"
+                     + " EstadoCondicion   = ?"
                      + " WHERE IDHormiga   = ?";
         try {
             Connection          conn = gjOpenConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);
             pstmt.setInt(1, entity.getGjIngestaNativa());
-            pstmt.setString(2, verificarTipo(entity.getGjIngestaNativa()));
-            pstmt.setString(3, dtf.format(now).toString());
+            pstmt.setString(2, dtf.format(now).toString());
+            pstmt.setString(3, gjVerificarTipoEstado(entity.getGjIngestaNativa(),entity.getGjNombreGenoAlimento()));
             pstmt.setInt(4, entity.getGjIDHormiga());
             pstmt.executeUpdate();
             return true;
-        } 
+        }
         catch (SQLException e) {
             throw new GJPatException(e.getMessage(), getClass().getName(), "update()");
         }
     }
 
-    /**
-     * metodo que verifica el tipo de dato seleccionado
-     * @param gjIngestaNativa: el numero ingesta nativa
-     * @return retona en lo que se deben convertir
-     */
-    private String verificarTipo(Integer gjIngestaNativa) {
-        if(gjIngestaNativa==4){
-            return "Hormiga de la tierra";
-        }else if(gjIngestaNativa==5){
-            return "Hormiga de la madera";
-        }else if(gjIngestaNativa==6){
-            return "Hormiga de la hoja";
-        }else if(gjIngestaNativa==7){
-            return "Hormiga de la fruta";
+
+    private String gjVerificarTipoEstado(Integer gjIngestaNativa, String gjGenoAlimento) {
+        if(gjIngestaNativa==4&&gjGenoAlimento.equals("XY")){
+            return "Viva";
+        }else{
+            return "Muerta";
         }
-        return "no";
     }
+
 
     /**
      * Metodo que asigna las provincias
@@ -244,12 +253,12 @@ public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormig
      * @param gjGenoAlimento: el numero genbo alimento
      * @return retona en lo que se deben convertir
      */
-    private int verificarSexo(Integer gjGenoAlimento) {
-        if(gjGenoAlimento==8){
+    private int gjVerificarSexo(Integer gjGenoAlimento) {
+        if(gjGenoAlimento==10){
             return 3;
         }else if(gjGenoAlimento==9){
-            return 2;
-        }else if(gjGenoAlimento==10){
+            return 3;
+        }else if(gjGenoAlimento==11){
             return 1;
         }
         return -1;

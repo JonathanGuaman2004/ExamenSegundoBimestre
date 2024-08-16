@@ -51,7 +51,7 @@ CREATE TABLE GJHormiga
     Provincia       INTEGER REFERENCES GJLocalidad(IdLocalidad),
     GenoAlimento    INTEGER REFERENCES GJAlimento(IDAlimento),
     IngestaNativa   INTEGER REFERENCES GJAlimento(IDAlimento),
-    EstadoCondición VARCHAR(10)  NOT NULL DEFAULT('Vivo'),
+    EstadoCondicion VARCHAR(10)  NOT NULL DEFAULT('Viva'),
     Estado          VARCHAR(1)  NOT NULL DEFAULT('A'),
     FechaCrea       DATETIME    DEFAULT(datetime('now','localtime')),
     FechaModifica   DATETIME

@@ -1,0 +1,85 @@
+@startuml
+package "BusinessLogic.Entities.Alimento" {
+    abstract class GJAlimento {
+        - gjTipo : String
+        + toString() : String
+    }
+
+    class GJCarnivoro extends GJIngestaNativa {
+        - gjTipo : String
+        + GJCarnivoro()
+        + toString() : String
+    }
+
+    abstract class GJGenoAlimento extends GJAlimento {
+
+    }
+
+    abstract class GJIngestaNativa extends GJAlimento {
+
+    }
+
+    class GJXY extends GJGenoAlimento {
+        - gjTipo : String
+        + GJXY()
+        + toString() : String
+    }
+}
+
+package "BusinessLogic.Entities.Hormiga" {
+    abstract class GJHormiga implements GJIHormiga {
+        - gjTipo : String
+        + toString() : String
+    }
+
+    interface GJIHormiga {
+        + gjComerIngestaNativa(GJHormiga_DTO entity, GJCarnivoro alimento) : boolean
+        + gjComerGenoAlimento(GJHormiga_DTO entity, GJXY alimento) : boolean
+    }
+
+    class GJLarva extends GJHormiga {
+        - tipo : String
+        - bl : GJHormigaBL
+        + GJLarva()
+        + getTipo() : String
+        + gjComerIngestaNativa(GJHormiga_DTO entity, GJCarnivoro alimento) : boolean
+        + gjComerGenoAlimento(GJHormiga_DTO entity, GJXY alimento) : boolean
+    }
+
+    class GJSoldado extends GJHormiga {
+        - gjTipo : String
+        + GJSoldado()
+        + gjComerGenoAlimento(GJHormiga_DTO entity, GJXY alimento) : boolean
+        + gjComerIngestaNativa(GJHormiga_DTO entity, GJCarnivoro alimento) : boolean
+    }
+}
+
+package "DataAccess.DTO" {
+    class GJHormiga_DTO {
+        + getGjNombreIngestaNativa() : String
+        + getGjNombreGenoAlimento() : String
+        + setGjIngestaNativa(int) : void
+        + setGjGenoAlimento(int) : void
+    }
+}
+
+package "BusinessLogic" {
+    class GJHormigaBL {
+        + gjUpdateIngAliment(GJHormiga_DTO entity) : boolean
+        + gjUpdateGenAliment(GJHormiga_DTO entity) : boolean
+    }
+}
+
+GJIHormiga <|.. GJHormiga
+GJAlimento <|-- GJGenoAlimento
+GJAlimento <|-- GJIngestaNativa
+GJHormiga <|-- GJLarva
+GJHormiga <|-- GJSoldado
+GJIngestaNativa <|-- GJCarnivoro
+GJGenoAlimento <|-- GJXY
+GJHormigaBL <-- GJLarva
+GJHormigaBL <-- GJSoldado
+GJIHormiga --> GJHormiga_DTO
+GJIHormiga --> GJCarnivoro
+GJIHormiga --> GJXY
+@enduml

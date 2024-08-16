@@ -16,13 +16,13 @@ public abstract class GJSQLiteDataHelper {
      * @return retorna la conexion
      * @throws Exception: En caso de haber errores, se lanzará esta excepcion que indicará el error o el problema de su ejecucion
      */
-    protected static synchronized Connection gjOpenConnection() throws Exception{
+    public static synchronized Connection gjOpenConnection() throws Exception{
         try {
             if(gjConn == null)
                 gjConn = DriverManager.getConnection(gjDBPathConnection);
         } catch (SQLException e) {
              throw e;
-        } 
+        }
         return gjConn;
     }
 

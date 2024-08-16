@@ -1,0 +1,101 @@
+@startuml
+package "DataAccess" {
+    package "DAO" {
+        class GJHormiga_DAO {
+            - gjVerificarTipoHormiga(gjGenoAlimento: Integer): String
+            - gjSeleccionarProvincia(): int
+            - gjVerificarSexo(gjGenoAlimento: Integer): int
+            - gjVerificarTipoEstado(gjIngestaNativa: Integer, gjGenoAlimento: String): String
+            + gjCreate(): boolean
+            + gjReadAll(): List<GJHormiga_DTO>
+            + gjDelete(id: int): boolean
+            + gjReadBy(id: Integer): GJHormiga_DTO
+            + gjGetMaxRow(): Integer
+            + gjUpdateGenoAlimento(entity: GJHormiga_DTO): boolean
+            + gjUpdateIngestaNativa(entity: GJHormiga_DTO): boolean
+        }
+    }
+
+    package "DTO" {
+        class GJHormiga_DTO {
+            - gjRowNum: Integer
+            - gjIDHormiga: Integer
+            - gjTipoHormiga: String
+            - gjSexo: Integer
+            - gjProvincia: Integer
+            - gjGenoAlimento: Integer
+            - gjIngestaNativa: Integer
+            - gjNombreGenoAlimento: String
+            - gjNombreIngestaNativa: String
+            - gjNombreSexo: String
+            - gjNombreProvincia: String
+            - gjEstadoCondición: String
+            - gjEstado: String
+            + GJHormiga_DTO(gjTipoHormiga: String)
+            + GJHormiga_DTO()
+            + GJHormiga_DTO(gjRowNum: Integer, gjIDHormiga: Integer, gjTipoHormiga: String, gjNombreGenoAlimento: String, gjNombreIngestaNativa: String, gjNombreSexo: String, gjNombreProvincia: String, gjEstadoCondición: String)
+            + getGjIDHormiga(): Integer
+            + setGjIDHormiga(gjIDHormiga: Integer)
+            + getGjTipoHormiga(): String
+            + setGjTipoHormiga(gjTipoHormiga: String)
+            + getGjSexo(): Integer
+            + setGjSexo(gjSexo: Integer)
+            + getGjProvincia(): Integer
+            + setGjProvincia(gjProvincia: Integer)
+            + getGjGenoAlimento(): Integer
+            + setGjGenoAlimento(gjGenoAlimento: Integer)
+            + getGjIngestaNativa(): Integer
+            + setGjIngestaNativa(gjIngestaNativa: Integer)
+            + getGjNombreSexo(): String
+            + setGjNombreSexo(gjNombreSexo: String)
+            + getGjNombreProvincia(): String
+            + setGjNombreProvincia(gjNombreProvincia: String)
+            + getGjNombreGenoAlimento(): String
+            + setGjNombreGenoAlimento(gjNombreGenoAlimento: String)
+            + getGjNombreIngestaNativa(): String
+            + setGjNombreIngestaNativa(gjNombreIngestaNativa: String)
+            + getGjEstadoCondición(): String
+            + setGjEstadoCondición(gjEstadoCondición: String)
+            + getGjEstado(): String
+            + setGjEstado(gjEstado: String)
+            + getGjRowNum(): Integer
+            + setGjRowNum(gjRowNum: Integer)
+        }
+    }
+
+    interface GJIDAO<T> {
+        + gjCreate(): boolean
+        + gjReadAll(): List<T>
+        + gjUpdateGenoAlimento(entity: T): boolean
+        + gjUpdateIngestaNativa(entity: T): boolean
+        + gjDelete(id: int): boolean
+        + gjReadBy(id: Integer): T
+        + gjGetMaxRow(): Integer
+    }
+
+    abstract class GJSQLiteDataHelper {
+        - gjDBPathConnection: String
+        - gjConn: Connection
+        + gjOpenConnection(): Connection
+        + GJcloseConnection(): void
+    }
+
+    class GJPatException {
+        + GJPatException(e: String, clase: String, metodo: String)
+        + getMessage(): String
+    }
+
+    GJHormiga_DAO --> GJIDAO
+    GJHormiga_DAO --> GJSQLiteDataHelper
+    GJHormiga_DTO --> GJSQLiteDataHelper
+    GJIDAO <|-- GJHormiga_DAO
+    GJSQLiteDataHelper <|-- GJHormiga_DAO
+    GJSQLiteDataHelper <|-- GJHormiga_DTO
+}
+
+package "BusinessLogic.Entities.Hormiga" {
+    class GJLarva
+}
+
+GJHormiga_DAO --> GJLarva
+@enduml

@@ -3,7 +3,6 @@ package UserInterface.Form;
 import java.awt.*;
 import javax.swing.*;
 
-import UserInterface.CustomerControl.GJPatButton;
 import UserInterface.CustomerControl.GJPatLabel;
 import UserInterface.CustomerControl.GJPatTextBox;
 

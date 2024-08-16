@@ -48,3 +48,4 @@ public class GJPatLabel extends JLabel{
         setHorizontalAlignment(alignment);
     }
 }
+

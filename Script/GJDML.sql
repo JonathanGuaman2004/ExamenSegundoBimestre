@@ -50,6 +50,7 @@ INSERT INTO GJAlimento
 (1              ,'Herbivoro'),
 (1              ,'Omnivoro'),
 (1              ,'Insectivoro'),
+(1              ,'Nectanivoro'),
 (2              ,'X'),
 (2              ,'XX'),
 (2              ,'XY');
@@ -57,17 +58,12 @@ INSERT INTO GJAlimento
 INSERT INTO GJSexo (NOMBRE) VALUES
  ("Macho")
 ,("Hembra")
-,("Asexual")
-,("Sin Confirmar");
+,("Asexual");
 
 INSERT INTO GJHormiga
-(TipoHormiga,Sexo,Provincia,GenoAlimento,IngestaNativa,EstadoCondición)VALUES
-('Larva'    ,1   ,7        , 8          , 7           ,'Vivo'),
-('Larva'    ,1   ,8        , 9          , 5           ,'Vivo'),
-('Larva'    ,1   ,9        , 10         , 6          ,'Muerto'),
-('Larva'    ,4   ,10       , 3          , 3           ,'Vivo'),
-('Larva'    ,4   ,11       , 3          , 3           ,'Vivo'),
-('Larva'    ,4   ,12       , 3          , 3           ,'Muerto')
+(TipoHormiga,Sexo,Provincia,GenoAlimento,IngestaNativa,EstadoCondicion)VALUES
+('Larva'    ,1   ,7        , 8          , 7           ,'Viva'),
+('Larva'    ,1   ,8        , 9          , 5           ,'Viva')
 ;
 
 
@@ -78,7 +74,7 @@ SELECT ROW_NUMBER () OVER ( ORDER BY IDHormiga ) RowNum
 ,a2.Nombre
 ,s.Nombre
 ,l.Nombre
-,h.EstadoCondición
+,h.EstadoCondicion
 FROM GJHormiga h
 JOIN GJAlimento a1 ON h.GenoAlimento  = a1.IDAlimento
 JOIN GJAlimento a2 ON h.IngestaNativa = a2.IDAlimento
@@ -107,7 +103,7 @@ FROM (
         ,a2.Nombre AS NombreAlimento2
         ,l.Nombre AS provincia
         ,s.Nombre AS Sexo
-        ,h.EstadoCondición AS estadoCondicion
+        ,h.EstadoCondicion AS estadoCondicion
     FROM GJHormiga h
     JOIN GJAlimento a1 ON h.GenoAlimento = a1.IDAlimento
     JOIN GJAlimento a2 ON h.IngestaNativa = a2.IDAlimento
@@ -115,7 +111,7 @@ FROM (
     JOIN GJLocalidad l ON h.Provincia = l.IdLocalidad
     WHERE h.Estado = 'A'
 ) sub
-WHERE RowNum = 11;
+WHERE RowNum = 1;
 
 SELECT COUNT (*) TotalRegistros
 FROM GJHormiga

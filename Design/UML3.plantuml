@@ -1,0 +1,125 @@
+@startuml
+
+' Define the package
+package "UserInterface.CustomerControl" {
+    class GJPatButton {
+        +GJPatButton(text: String)
+        +GJPatButton(text: String, iconPath: String)
+        +void gjCustomizeComponent(text: String, iconPath: String)
+        +void gjCustomizeComponent(text: String)
+        +void mouseClicked(e: MouseEvent)
+        +void mousePressed(e: MouseEvent)
+        +void mouseReleased(e: MouseEvent)
+        +void mouseEntered(e: MouseEvent)
+        +void mouseExited(e: MouseEvent)
+    }
+    
+    class GJPatLabel {
+        +GJPatLabel()
+        +GJPatLabel(text: String)
+        +void setCustomizeComponent(text: String, font: Font, color: Color, alignment: int)
+    }
+
+    class GJPatLabelText {
+        -GJPatLabel lblEtiqueta
+        -GJPatTextBox txtContenido
+        +GJPatLabelText(etiqueta: String)
+    }
+
+    class GJPatTextBox {
+        +GJPatTextBox()
+        +void customizeComponent()
+        +void setBorderRect()
+        +void setBorderLine()
+    }
+}
+
+package "UserInterface.Form" {
+    class GJHormigaPanel {
+        -Integer rowNum
+        -Integer idRowMaxSexo
+        -GJHormigaBL gjHormigaBL
+        -GJHormiga_DTO gjHormigaDAO
+        -GJLarva larva
+        -GJCarnivoro carne
+        -GJXY xy
+        -String[] gjItemsGenoAlimento
+        -String[] gjItemsIngestaNativa
+        -JComboBox<String> gjComboBoxGenoAlimento
+        -JComboBox<String> gjComboBoxIngestaNativa
+        -GJPatLabel lblTitulo
+        -GJPatLabel lblNombre
+        -GJPatLabel lblrowNum
+        -GJPatLabel lblTotalReg
+        -GJPatLabel lblGenoAlimento
+        -GJPatLabel lblIngestaNativa
+        -GJPatTextBox txtrowNum
+        -GJPatTextBox txtNombre
+        -GJPatButton btnRowIni
+        -GJPatButton btnRowAnt
+        -GJPatButton btnRowSig
+        -GJPatButton btnRowFin
+        -GJPatButton btnCrear
+        -GJPatButton btnAlimeGeno
+        -GJPatButton btnAlimeInge
+        -GJPatButton btnGuardar
+        -GJPatButton btnEliminar
+        -JPanel pnlTabla
+        -JPanel pnlBtnRow
+        -JPanel pnlBtnCrear
+        -JPanel pnlBtnGenoA
+        -JPanel pnlBtnInges
+        -JPanel pnlBtnCRUD
+        +GJHormigaPanel()
+        +void btnUpdateAlimeInge()
+        +Integer gjObtenerDatoComboBox2(gjComboBoxDos: JComboBox<String>)
+        +void btnUpdateAlimeGeno()
+        +Integer gjObtenerDatoComboBox1(gjComboBoxUno: JComboBox<String>)
+        +void loadRow()
+        +void showRow()
+        +void btnNuevoClick() throws Exception
+        +void btnGuardarClick()
+        +void btnEliminarClick()
+        +void actionPerformed(e: ActionEvent)
+        +void showTable() throws Exception
+        +void customizeComponent()
+    }
+
+    class GJLoginPanel {
+        -GJPatLabel lblUsername
+        -GJPatLabel lblPassword
+        -GJPatTextBox txtUsername
+        -GJPatTextBox txpPassword
+        -JButton btnLogin
+        +GJLoginPanel()
+        +void btnLoginClick()
+        +void initializeComponents()
+    }
+
+    class GJMainForm {
+        -GJMenuPanel pnlMenu
+        -JPanel pnlMain
+        -GJLoginPanel pnlLogin
+        +GJMainForm(tilteApp: String)
+        +void setPanel(formularioPanel: JPanel)
+        +void customizeComponent(tilteApp: String)
+    }
+}
+
+' Define relationships
+GJPatButton ..|> JButton
+GJPatLabel ..|> JLabel
+GJPatTextBox ..|> JTextField
+GJPatLabelText -- GJPatLabel
+GJPatLabelText -- GJPatTextBox
+GJHormigaPanel ..> GJPatButton : uses
+GJHormigaPanel ..> GJPatLabel : uses
+GJHormigaPanel ..> GJPatTextBox : uses
+GJHormigaPanel ..> JComboBox : uses
+GJLoginPanel ..> GJPatLabel : uses
+GJLoginPanel ..> GJPatTextBox : uses
+GJMainForm ..> GJMenuPanel : uses
+GJMainForm ..> GJLoginPanel : uses
+GJMainForm ..> GJHormigaPanel : uses
+
+@enduml

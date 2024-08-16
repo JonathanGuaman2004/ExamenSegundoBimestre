@@ -3,6 +3,9 @@ package UserInterface.Form;
 import javax.swing.*;
 
 import BusinessLogic.GJHormigaBL;
+import BusinessLogic.Entities.Alimento.GJCarnivoro;
+import BusinessLogic.Entities.Alimento.GJXY;
+import BusinessLogic.Entities.Hormiga.GJLarva;
 import DataAccess.DTO.GJHormiga_DTO;
 import UserInterface.GJIAStyle;
 import UserInterface.CustomerControl.GJPatButton;
@@ -22,8 +25,11 @@ public class GJHormigaPanel  extends JPanel implements ActionListener {
     private Integer rowNum = 0, idRowMaxSexo=0;
     private GJHormigaBL  gjHormigaBL  = new GJHormigaBL();
     private GJHormiga_DTO gjHormigaDAO = null;
+    private GJLarva larva = new GJLarva();
+    private GJCarnivoro carne = new GJCarnivoro();
+    private GJXY xy = new GJXY();
     private String [] gjItemsGenoAlimento = {"X","XX","XY"};
-    private String [] gjItemsIngestaNativa = {"Hervivoro","Carnivoro","Omnivoro","Insectivoro"};
+    private String [] gjItemsIngestaNativa = {"Herbivoro","Carnivoro","Omnivoro","Insectivoro","Nectanivoro"};
     JComboBox<String> gjComboBoxGenoAlimento = new JComboBox<>(gjItemsGenoAlimento);
     JComboBox<String> gjComboBoxIngestaNativa = new JComboBox<>(gjItemsIngestaNativa);
 
@@ -45,8 +51,8 @@ public class GJHormigaPanel  extends JPanel implements ActionListener {
         btnRowFin   = new GJPatButton(" >| "),
 
         btnCrear    = new GJPatButton("Crear Hormiga Larva"),
-        btnAlimeGeno= new GJPatButton("Crear Hormiga Larva"),
-        btnAlimeInge= new GJPatButton("Crear Hormiga Larva"),
+        btnAlimeGeno= new GJPatButton("Alimentar con GenoAliemnto"),
+        btnAlimeInge= new GJPatButton("Alimentar con Ingesta Nativa"),
 
         btnGuardar  = new GJPatButton("Guardar"),
         btnEliminar = new GJPatButton("Eliminar");
@@ -97,10 +103,14 @@ public class GJHormigaPanel  extends JPanel implements ActionListener {
     private void btnUpdateAlimeInge() {
         try {
             if (GJIAStyle.showConfirmYesNo("¿Seguro que desea ACTUALIZAR ?")){
-                gjHormigaDAO.setGjIngestaNativa(gjObtenerDatoComboBox2(gjComboBoxIngestaNativa));
-                if(gjHormigaBL.gjUpdateIngAliment(gjHormigaDAO)){
+                gjHormigaDAO.setGjNombreIngestaNativa(gjComboBoxIngestaNativa.getSelectedItem().toString());
+                if(larva.gjComerIngestaNativa(gjHormigaDAO, carne)){
                     GJIAStyle.showMsg("Se actualizó la alimentación genética de la hormiga");
                 }
+                /*gjHormigaDAO.setGjIngestaNativa(gjObtenerDatoComboBox2(gjComboBoxIngestaNativa));
+                if(gjHormigaBL.gjUpdateIngAliment(gjHormigaDAO)){
+                    GJIAStyle.showMsg("Se actualizó la alimentación genética de la hormiga");
+                }*/
                 loadRow();
                 showRow();
                 showTable();
@@ -134,10 +144,15 @@ public class GJHormigaPanel  extends JPanel implements ActionListener {
     private void btnUpdateAlimeGeno() {
         try {
             if (GJIAStyle.showConfirmYesNo("¿Seguro que desea ACTUALIZAR ?")){
+                gjHormigaDAO.setGjNombreGenoAlimento(gjComboBoxGenoAlimento.getSelectedItem().toString());
+                if(larva.gjComerGenoAlimento(gjHormigaDAO, xy)){
+                    GJIAStyle.showMsg("Se actualizó la alimentación genética de la hormiga");
+                }
+                /*
                 gjHormigaDAO.setGjGenoAlimento(gjObtenerDatoComboBox1(gjComboBoxGenoAlimento));
                 if(gjHormigaBL.gjUpdateGenAliment(gjHormigaDAO)){
                     GJIAStyle.showMsg("Se actualizó la alimentación genética de la hormiga");
-                }
+                }*/
                 loadRow();
                 showRow();
                 showTable();
@@ -255,8 +270,8 @@ public class GJHormigaPanel  extends JPanel implements ActionListener {
      * @throws Exception: En caso de haber errores, se lanzará esta excepcion que indicará el error o el problema de su ejecucion
      */
     private void showTable() throws Exception {
-        String[] header = {"RN","ID","Tipo", "Geno Alimento", "Ingesta Nativa","Sexo","Localidad","Estado"};
-        Object[][] data = new Object[gjHormigaBL.getAll().size()][8];
+        String[] header = {"RegNro","ID","Tipo", "Geno Alimento", "Ingesta Nativa","Sexo","Ubicación","Estado","ChipIa"};
+        Object[][] data = new Object[gjHormigaBL.getAll().size()][9];
         int index = 0;
         for (GJHormiga_DTO s : gjHormigaBL.getAll()) {
             data[index][0] = s.getGjRowNum();
@@ -267,6 +282,8 @@ public class GJHormigaPanel  extends JPanel implements ActionListener {
             data[index][5] = s.getGjNombreSexo();
             data[index][6] = s.getGjNombreProvincia();
             data[index][7] = s.getGjEstadoCondición();
+            //****** */
+            data[index][8] = imprimirMsg(s.getGjEstadoCondición());
             index++;
         }
 
@@ -299,6 +316,13 @@ public class GJHormigaPanel  extends JPanel implements ActionListener {
                 }
             }
         });
+    }
+
+    private Object imprimirMsg(String gjEstadoCondición) {
+        if(gjEstadoCondición.equals("Viva")){
+            return "Aprendiendo espanol";
+        }
+        return "Ya no";
     }
 
     /**
