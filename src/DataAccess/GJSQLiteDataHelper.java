@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase para crear la conexion
+ */
 public abstract class GJSQLiteDataHelper {
     private static String gjDBPathConnection = "jdbc:sqlite:DataBase//GJEcuaFauna.sqlite"; 
     private static Connection gjConn = null;

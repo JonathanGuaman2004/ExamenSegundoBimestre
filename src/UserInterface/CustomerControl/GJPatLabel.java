@@ -2,11 +2,12 @@ package UserInterface.CustomerControl;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.JLabel;
-
 import UserInterface.GJIAStyle;
 
+/**
+ * clase para los label
+ */
 public class GJPatLabel extends JLabel{
     /**
      * Constructor Vacio

@@ -1,5 +1,8 @@
 package Framework;
 
+/**
+ * clase para atrapar los errores
+ */
 public class GJPatException extends Exception {
 
     /**

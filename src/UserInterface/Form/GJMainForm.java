@@ -5,10 +5,13 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+/**
+ * clase para las acciones de los botones del menu
+ */
 public class GJMainForm extends JFrame{
-    GJMenuPanel  pnlMenu = new GJMenuPanel();
-    JPanel     pnlMain = new GJMainPanel();
+    GJMenuPanel pnlMenu = new GJMenuPanel();
+    JPanel      pnlMain = new GJMainPanel();
+    GJLoginPanel pnlLogin = new GJLoginPanel();
 
     /**
      * metodo para las acciones de los botones
@@ -16,13 +19,13 @@ public class GJMainForm extends JFrame{
      */
     public GJMainForm(String tilteApp) {
         customizeComponent(tilteApp);
-        pnlMenu.btnHome.addActionListener(      e -> setPanel(new GJMainPanel())); 
-        pnlMenu.btnLogin.addActionListener(     e -> setPanel(new GJLoginPanel())); 
-        pnlMenu.btnSexo.addActionListener(      e -> setPanel(new GJHormigaPanel()));  
+        pnlMenu.btnHome.addActionListener(      e -> setPanel(new GJMainPanel()));
+        pnlMenu.btnLogin.addActionListener(     e -> setPanel(new GJLoginPanel()));
+        pnlMenu.btnSimulador.addActionListener(      e -> setPanel(new GJHormigaPanel()));
     }
 
     /**
-     * ajustes del panel 
+     * ajustes del panel
      * @param formularioPanel: formularioPanel
      */
     private void setPanel(JPanel formularioPanel) {
@@ -51,5 +54,5 @@ public class GJMainForm extends JFrame{
         container.add(pnlMenu, BorderLayout.WEST);
         container.add(pnlMain, BorderLayout.CENTER);
         setVisible(true);
-    }   
+    }
 }

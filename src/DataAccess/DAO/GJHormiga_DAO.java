@@ -14,6 +14,9 @@ import DataAccess.GJSQLiteDataHelper;
 import DataAccess.DTO.GJHormiga_DTO;
 import Framework.GJPatException;
 
+/**
+ * Clase del Dao de las hormigas
+ */
 public class GJHormiga_DAO extends GJSQLiteDataHelper implements GJIDAO<GJHormiga_DTO> {
 
     @Override

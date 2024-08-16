@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import UserInterface.GJIAStyle;
 
+/**
+ * clase para la pantalla de carga del inicio
+ */
 public class GJSplashScreenForm {
     private static JFrame       frmSplash;
     private static JProgressBar prbLoading;

@@ -3,9 +3,13 @@ package UserInterface.Form;
 import java.awt.*;
 import javax.swing.*;
 
+import UserInterface.CustomerControl.GJPatButton;
 import UserInterface.CustomerControl.GJPatLabel;
 import UserInterface.CustomerControl.GJPatTextBox;
 
+/**
+ * panel del login
+ */
 public class GJLoginPanel extends JPanel {
     private GJPatLabel        lblUsername,
                             lblPassword;
@@ -27,12 +31,13 @@ public class GJLoginPanel extends JPanel {
     private void btnLoginClick() {
         String username = txtUsername.getText();
         String password = txpPassword.getText();
-        if(username!="Padmic"||password!="1234"){
-            JOptionPane.showMessageDialog(this, "Invalid username or password");
-        }else{
+        if(username.equals("1234")&&password.equals("1234")){
             JOptionPane.showMessageDialog(GJLoginPanel.this, "Usuario: " + username + "\nContraseña: " + new String(password), "Login Exitoso", JOptionPane.INFORMATION_MESSAGE);
             txtUsername.setText("");
             txpPassword.setText("");
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Invalid username or password");
         }
     }
 
@@ -77,5 +82,6 @@ public class GJLoginPanel extends JPanel {
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         add(btnLogin, gbc);
+
     }
 }

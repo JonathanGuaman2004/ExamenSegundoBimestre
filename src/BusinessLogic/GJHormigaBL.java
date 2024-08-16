@@ -1,10 +1,12 @@
 package BusinessLogic;
 
 import java.util.List;
-
 import DataAccess.DAO.GJHormiga_DAO;
 import DataAccess.DTO.GJHormiga_DTO;
 
+/**
+ * Clase de Business logic de las hormigas
+ */
 public class GJHormigaBL {
     private GJHormiga_DTO gjHormiga_DTO;
     private GJHormiga_DAO gjHormiga_DAO = new GJHormiga_DAO();

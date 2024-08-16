@@ -15,6 +15,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * panel para trabajar con las hormigas
+ */
 public class GJHormigaPanel  extends JPanel implements ActionListener {
     private Integer rowNum = 0, idRowMaxSexo=0;
     private GJHormigaBL  gjHormigaBL  = new GJHormigaBL();
@@ -36,11 +39,6 @@ public class GJHormigaPanel  extends JPanel implements ActionListener {
         txtrowNum   = new GJPatTextBox(),
         txtNombre   = new GJPatTextBox();
     private GJPatButton
-        btnPageIni  = new GJPatButton(" |< "),
-        btnPageAnt  = new GJPatButton(" << "),
-        btnPageSig  = new GJPatButton(" >> "),
-        btnPageFin  = new GJPatButton(" >| "),
-
         btnRowIni   = new GJPatButton(" |< "),
         btnRowAnt   = new GJPatButton(" << "),
         btnRowSig   = new GJPatButton(" >> "),

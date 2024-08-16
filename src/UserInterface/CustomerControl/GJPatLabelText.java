@@ -1,11 +1,12 @@
 package UserInterface.CustomerControl;
 
 import javax.swing.*;
-
 import UserInterface.GJIAStyle;
-
 import java.awt.*;
 
+/**
+ * clase para los label text
+ */
 public class GJPatLabelText extends JPanel{
     private GJPatLabel    lblEtiqueta = new GJPatLabel();
     private GJPatTextBox  txtContenido= new GJPatTextBox();

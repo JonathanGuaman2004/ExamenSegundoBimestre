@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import UserInterface.GJIAStyle;
 
+/**
+ * clase para el panel principal
+ */
 public class GJMainPanel extends JPanel{
     
     /**

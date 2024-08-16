@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import UserInterface.GJIAStyle;
 import javax.swing.ImageIcon;
 
+/**
+ * clase para editar los botones
+ */
 public class GJPatButton  extends JButton implements MouseListener {
     public GJPatButton(String text){
         gjCustomizeComponent(text);

@@ -13,12 +13,15 @@ import javax.swing.JPanel;
 import UserInterface.GJIAStyle;
 import UserInterface.CustomerControl.GJPatButton;
 
+/**
+ * Clase para el panel de menu principal
+ */
 public class GJMenuPanel extends JPanel {
     public  GJPatButton
             btnHome     = new GJPatButton("Home"),
             btnLogin    = new GJPatButton("Login"),
-            btnSexo     = new GJPatButton("Sexo");
-
+            btnSimulador= new GJPatButton("Simulador");
+            
     /**
      * contructor vacio
      */
@@ -43,8 +46,7 @@ public class GJMenuPanel extends JPanel {
 
         add(btnHome);
         add(btnLogin);
-        add(btnSexo);
-
+        add(btnSimulador);
         add(new JLabel("\u00A9 2024 Jonathan_Guaman"));
     }
 }

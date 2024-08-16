@@ -2,6 +2,9 @@ package DataAccess;
 
 import java.util.List;
 
+/**
+ * Interface para el CRUD
+ */
 public interface GJIDAO<T> {
     /**
      * Metodo que crea un objeto

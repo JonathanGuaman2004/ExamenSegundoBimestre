@@ -8,6 +8,9 @@ import javax.swing.border.EmptyBorder;
 
 import UserInterface.GJIAStyle;
 
+/**
+ * Clase par los cuadros de texto
+ */
 public class GJPatTextBox extends JTextField {
 
     /**

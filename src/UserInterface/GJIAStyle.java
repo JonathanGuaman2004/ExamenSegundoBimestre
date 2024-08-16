@@ -11,9 +11,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-public abstract class GJIAStyle {
-    
 
+/**
+ *Clase para guardar los estilos
+ */
+public abstract class GJIAStyle {
     public static final Color COLOR_FONT = new Color(0, 100, 50); //(218, 8, 40)
     public static final Color COLOR_FONT_LIGHT = new Color(0, 100, 100);
     public static final Color COLOR_CURSOR = Color.black;

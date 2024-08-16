@@ -1,5 +1,8 @@
 package DataAccess.DTO;
 
+/**
+ * Clase dto de las hormigas
+ */
 public class GJHormiga_DTO {
 
     private Integer gjRowNum;
